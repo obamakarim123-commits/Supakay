@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUPAKAY COMPANY LIMITED — Reliable Logistics & Business Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #0B1E3D;
+    --navy-deep: #07152B;
+    --navy-mid: #132A50;
+    --navy-light: #1E3F73;
+    --orange: #F4640A;
+    --orange-light: #FF7E2A;
+    --orange-glow: rgba(244,100,10,0.25);
+    --white: #FFFFFF;
+    --off-white: #F7F8FC;
+    --gray-light: #EEF0F6;
+    --gray: #8A95A8;
+    --text-dark: #0D1B2E;
+    --text-body: #3D4F66;
+    --font-head: 'Barlow Condensed', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-sub: 'Barlow', sans-serif;
+    --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-card: 0 4px 30px rgba(11,30,61,0.10);
+    --shadow-hover: 0 16px 48px rgba(11,30,61,0.18);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text-body);
+    background: var(--white);
+    overflow-x: hidden;
+    line-height: 1.65;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--navy-deep); }
+  ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 3px; }
+
+  /* ─── NAV ─── */
+  #navbar {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+    padding: 22px 6vw;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: background var(--transition), padding var(--transition), box-shadow var(--transition);
+  }
+  #navbar.scrolled {
+    background: rgba(7,21,43,0.97);
+    backdrop-filter: blur(12px);
+    padding: 14px 6vw;
+    box-shadow: 0 2px 40px rgba(0,0,0,0.3);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .logo-mark {
+    width: 44px; height: 44px;
+    background: var(--orange);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 20px;
+    color: white;
+    letter-spacing: -1px;
+    flex-shrink: 0;
+  }
+  .logo-text { line-height: 1.15; }
+  .logo-text .company-name {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 17px;
+    color: white;
+    letter-spacing: 0.5px;
+  }
+  .logo-text .company-tag {
+    font-size: 10px;
+    color: var(--orange-light);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: var(--font-sub);
+  }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: rgba(255,255,255,0.82);
+    font-size: 14px;
+    font-weight: 500;
+    font-family: var(--font-sub);
+    letter-spacing: 0.3px;
+    position: relative;
+    transition: color var(--transition);
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -3px; left: 0;
+    width: 0; height: 2px;
+    background: var(--orange);
+    transition: width var(--transition);
+  }
+  .nav-links a:hover { color: white; }
+  .nav-links a:hover::after { width: 100%; }
+
+  .btn-nav {
+    background: var(--orange);
+    color: white !important;
+    padding: 11px 24px;
+    border-radius: 6px;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    transition: transform var(--transition), background var(--transition), box-shadow var(--transition) !important;
+  }
+  .btn-nav:hover {
+    background: var(--orange-light) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--orange-glow);
+  }
+  .btn-nav::after { display: none !important; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 6px;
+    background: none;
+    border: none;
+  }
+  .hamburger span {
+    display: block; width: 26px; height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background: var(--navy-deep);
+    z-index: 999;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 32px;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  .mobile-menu.open { transform: translateX(0); }
+  .mobile-menu a {
+    font-family: var(--font-head);
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color var(--transition);
+  }
+  .mobile-menu a:hover { color: var(--orange); }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    background:
+      linear-gradient(to bottom right, rgba(7,21,43,0.88) 0%, rgba(7,21,43,0.72) 60%, rgba(244,100,10,0.25) 100%),
+      url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1800&q=80') center/cover no-repeat;
+    display: flex; align-items: center;
+    padding: 0 6vw;
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(244,100,10,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(244,100,10,0.18);
+    border: 1px solid rgba(244,100,10,0.4);
+    border-radius: 40px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-family: var(--font-sub);
+    font-weight: 600;
+    color: var(--orange-light);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: heroFadeUp 0.8s 0.2s forwards;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: var(--orange);
+    border-radius: 50%;
+    animation: pulse 1.8s infinite;
+  }
+
+  .hero-content { max-width: 760px; }
+
+  .hero-headline {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: clamp(46px, 7vw, 88px);
+    line-height: 1.0;
+    color: white;
+    letter-spacing: -1px;
+    opacity: 0;
+    animation: heroFadeUp 0.9s 0.4s forwards;
+  }
+  .hero-headline span { color: var(--orange); }
+
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 19px);
+    color: rgba(255,255,255,0.72);
+    max-width: 540px;
+    margin-top: 22px;
+    line-height: 1.7;
+    font-weight: 300;
+    opacity: 0;
+    animation: heroFadeUp 0.9s 0.65s forwards;
+  }
+
+  .hero-btns {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    margin-top: 40px;
+    opacity: 0;
+    animation: heroFadeUp 0.9s 0.9s forwards;
+  }
+  .btn-primary {
+    background: var(--orange);
+    color: white;
+    padding: 15px 34px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    font-family: var(--font-sub);
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+    display: inline-flex; align-items: center; gap: 8px;
+    letter-spacing: 0.3px;
+  }
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(244,100,10,0.45);
+    background: var(--orange-light);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: white;
+    padding: 15px 34px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    font-family: var(--font-sub);
+    border: 2px solid rgba(255,255,255,0.38);
+    transition: border-color var(--transition), background var(--transition), transform var(--transition);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-secondary:hover {
+    border-color: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.08);
+    transform: translateY(-3px);
+  }
+
+  .hero-scroll {
+    position: absolute; bottom: 36px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0;
+    animation: heroFadeUp 0.9s 1.3s forwards;
+    cursor: pointer;
+  }
+  .scroll-text {
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: var(--font-sub);
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+    animation: scrollBob 1.6s ease-in-out infinite;
+  }
+
+  /* ─── STATS ─── */
+  #stats {
+    background: var(--navy-deep);
+    padding: 60px 6vw;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .stat-item {
+    background: var(--navy-mid);
+    padding: 44px 36px;
+    text-align: center;
+    position: relative;
+    transition: background var(--transition);
+  }
+  .stat-item:hover { background: rgba(30,63,115,0.9); }
+  .stat-item::after {
+    content: '';
+    position: absolute; bottom: 0; left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 60%; height: 3px;
+    background: var(--orange);
+    transition: transform var(--transition);
+    border-radius: 2px;
+  }
+  .stat-item:hover::after { transform: translateX(-50%) scaleX(1); }
+  .stat-num {
+    font-family: var(--font-head);
+    font-size: 58px;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+    display: block;
+  }
+  .stat-num span { color: var(--orange); }
+  .stat-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: var(--font-sub);
+    font-weight: 500;
+    margin-top: 8px;
+    display: block;
+  }
+
+  /* ─── SECTION COMMON ─── */
+  section { padding: 96px 6vw; }
+  .section-tag {
+    font-size: 12px;
+    color: var(--orange);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-family: var(--font-sub);
+    font-weight: 600;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .section-title {
+    font-family: var(--font-head);
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.05;
+    letter-spacing: -0.5px;
+  }
+  .section-title-white { color: white; }
+  .section-lead {
+    font-size: 17px;
+    color: var(--text-body);
+    max-width: 560px;
+    margin-top: 16px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ─── SERVICES ─── */
+  #services { background: var(--off-white); }
+  .services-header { margin-bottom: 56px; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .service-card {
+    background: white;
+    border-radius: 14px;
+    padding: 40px 36px;
+    border: 1px solid rgba(11,30,61,0.06);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 4px; height: 0;
+    background: var(--orange);
+    transition: height 0.4s ease;
+    border-radius: 0 0 4px 0;
+  }
+  .service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); border-color: transparent; }
+  .service-card:hover::before { height: 100%; }
+
+  .service-icon {
+    width: 56px; height: 56px;
+    background: var(--off-white);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+    transition: background var(--transition), transform var(--transition);
+  }
+  .service-card:hover .service-icon {
+    background: rgba(244,100,10,0.1);
+    transform: scale(1.1);
+  }
+  .service-icon svg { width: 28px; height: 28px; }
+  .service-title {
+    font-family: var(--font-head);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 12px;
+    letter-spacing: 0.2px;
+  }
+  .service-desc {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.72;
+    font-weight: 300;
+  }
+  .service-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--orange);
+    text-decoration: none;
+    font-family: var(--font-sub);
+    transition: gap var(--transition);
+  }
+  .service-link:hover { gap: 10px; }
+
+  /* ─── WHY US ─── */
+  #why {
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .why-visual {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    height: 520px;
+  }
+  .why-visual img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .why-visual:hover img { transform: scale(1.04); }
+  .why-visual-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(7,21,43,0.5) 0%, transparent 60%);
+  }
+  .why-badge-float {
+    position: absolute; bottom: 32px; left: 32px;
+    background: white;
+    border-radius: 12px;
+    padding: 18px 24px;
+    display: flex; align-items: center; gap: 14px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  }
+  .badge-icon-wrap {
+    width: 46px; height: 46px;
+    background: var(--orange);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .badge-text strong {
+    display: block;
+    font-family: var(--font-head);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .badge-text span {
+    font-size: 12px;
+    color: var(--gray);
+    font-weight: 500;
+  }
+
+  .why-list { margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
+  .why-item {
+    display: flex; gap: 18px; align-items: flex-start;
+    padding: 22px 24px;
+    border-radius: 12px;
+    border: 1px solid var(--gray-light);
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    background: white;
+  }
+  .why-item:hover {
+    border-color: rgba(244,100,10,0.25);
+    transform: translateX(6px);
+    box-shadow: -4px 0 0 var(--orange), var(--shadow-card);
+  }
+  .why-item-icon {
+    width: 44px; height: 44px;
+    background: rgba(244,100,10,0.08);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .why-item-icon svg { width: 22px; height: 22px; }
+  .why-item-text strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .why-item-text span {
+    font-size: 13px;
+    color: var(--text-body);
+    font-weight: 300;
+  }
+
+  /* ─── HIGHLIGHT BAND ─── */
+  #highlight {
+    background:
+      linear-gradient(to right, rgba(7,21,43,0.92) 0%, rgba(7,21,43,0.78) 50%, rgba(244,100,10,0.3) 100%),
+      url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1800&q=80') center/cover no-repeat fixed;
+    padding: 100px 6vw;
+    text-align: center;
+  }
+  #highlight .section-lead { color: rgba(255,255,255,0.72); margin: 16px auto 0; }
+  .highlight-features {
+    display: flex; justify-content: center; flex-wrap: wrap;
+    gap: 32px;
+    margin-top: 52px;
+  }
+  .hl-feat {
+    display: flex; align-items: center; gap: 10px;
+    color: rgba(255,255,255,0.8);
+    font-size: 15px;
+    font-family: var(--font-sub);
+    font-weight: 500;
+  }
+  .hl-feat::before {
+    content: '';
+    width: 8px; height: 8px;
+    background: var(--orange);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  #testimonials { background: var(--off-white); overflow: hidden; }
+  .testi-header { margin-bottom: 56px; }
+  .testi-track-wrap { overflow: hidden; position: relative; }
+  .testi-track {
+    display: flex;
+    gap: 28px;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .testi-card {
+    background: white;
+    border-radius: 16px;
+    padding: 36px 32px;
+    min-width: calc(33.333% - 19px);
+    flex-shrink: 0;
+    border: 1px solid rgba(11,30,61,0.06);
+    transition: transform var(--transition), box-shadow var(--transition);
+    position: relative;
+  }
+  .testi-card.active { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+  .testi-quote {
+    font-size: 42px;
+    color: var(--orange);
+    line-height: 1;
+    font-family: Georgia, serif;
+    margin-bottom: 16px;
+    opacity: 0.6;
+  }
+  .testi-text {
+    font-size: 15px;
+    color: var(--text-body);
+    line-height: 1.75;
+    font-weight: 300;
+    font-style: italic;
+  }
+  .testi-author {
+    margin-top: 24px;
+    display: flex; align-items: center; gap: 14px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-light);
+  }
+  .author-avatar {
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 17px;
+    color: white;
+    flex-shrink: 0;
+  }
+  .author-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--navy);
+  }
+  .author-role {
+    font-size: 12px;
+    color: var(--gray);
+    margin-top: 2px;
+  }
+  .star-row { display: flex; gap: 3px; margin-bottom: 8px; }
+  .star-row span { color: var(--orange); font-size: 14px; }
+
+  .testi-controls {
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    margin-top: 40px;
+  }
+  .testi-btn {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--gray-light);
+    background: white;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color var(--transition), background var(--transition);
+  }
+  .testi-btn:hover { border-color: var(--orange); background: var(--orange); }
+  .testi-btn:hover svg path { stroke: white; }
+  .testi-btn svg { width: 18px; height: 18px; }
+  .testi-dots { display: flex; gap: 8px; }
+  .testi-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gray-light);
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+  }
+  .testi-dot.active { background: var(--orange); transform: scale(1.35); }
+
+  /* ─── CTA ─── */
+  #cta {
+    background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-mid) 60%, rgba(244,100,10,0.4) 100%);
+    padding: 100px 6vw;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #cta::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 80px solid rgba(244,100,10,0.08);
+    pointer-events: none;
+  }
+  #cta::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -50px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 60px solid rgba(255,255,255,0.04);
+    pointer-events: none;
+  }
+  .cta-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,0.65);
+    max-width: 540px;
+    margin: 18px auto 40px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .btn-cta-pulse {
+    background: var(--orange);
+    color: white;
+    padding: 18px 48px;
+    border-radius: 6px;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    font-family: var(--font-sub);
+    display: inline-flex; align-items: center; gap: 10px;
+    animation: ctaPulse 2.4s ease-in-out infinite;
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  .btn-cta-pulse:hover {
+    animation: none;
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 16px 48px rgba(244,100,10,0.55);
+  }
+
+  /* ─── CONTACT / FOOTER ─── */
+  #contact { background: var(--navy-deep); padding: 96px 6vw 0; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 72px;
+  }
+  .contact-form-wrap { }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .form-group {
+    position: relative;
+    margin-bottom: 18px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: var(--font-sub);
+    margin-bottom: 8px;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 14px 18px;
+    color: white;
+    font-size: 14px;
+    font-family: var(--font-body);
+    outline: none;
+    transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--orange);
+    background: rgba(244,100,10,0.07);
+    box-shadow: 0 0 0 3px rgba(244,100,10,0.12);
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-group select option { background: var(--navy-mid); }
+  .form-submit {
+    width: 100%;
+    background: var(--orange);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: var(--font-sub);
+    cursor: pointer;
+    transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+    margin-top: 8px;
+    letter-spacing: 0.3px;
+  }
+  .form-submit:hover {
+    transform: translateY(-2px);
+    background: var(--orange-light);
+    box-shadow: 0 8px 24px rgba(244,100,10,0.45);
+  }
+
+  .contact-info { }
+  .contact-info-head {
+    font-family: var(--font-head);
+    font-size: 38px;
+    font-weight: 800;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .contact-info-lead {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+  .contact-detail {
+    display: flex; align-items: flex-start; gap: 16px;
+    margin-bottom: 28px;
+  }
+  .detail-icon {
+    width: 44px; height: 44px;
+    background: rgba(244,100,10,0.15);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid rgba(244,100,10,0.25);
+  }
+  .detail-icon svg { width: 20px; height: 20px; }
+  .detail-content strong {
+    display: block;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: var(--font-sub);
+    margin-bottom: 4px;
+  }
+  .detail-content span {
+    font-size: 15px;
+    color: rgba(255,255,255,0.88);
+    line-height: 1.5;
+  }
+
+  /* ─── FOOTER BAR ─── */
+  .footer-bar {
+    background: rgba(255,255,255,0.04);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 28px 6vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-bar p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.38);
+    font-family: var(--font-sub);
+  }
+  .footer-bar p span { color: var(--orange); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-size: 13px;
+    color: rgba(255,255,255,0.38);
+    text-decoration: none;
+    font-family: var(--font-sub);
+    transition: color var(--transition);
+  }
+  .footer-links a:hover { color: var(--orange); }
+
+  /* ─── WHATSAPP FLOAT ─── */
+  .wa-float {
+    position: fixed; bottom: 28px; right: 28px; z-index: 900;
+    width: 58px; height: 58px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+    text-decoration: none;
+    transition: transform var(--transition), box-shadow var(--transition);
+    animation: waBounce 3s ease-in-out infinite;
+  }
+  .wa-float:hover {
+    transform: scale(1.12);
+    box-shadow: 0 8px 32px rgba(37,211,102,0.6);
+    animation: none;
+  }
+  .wa-float svg { width: 30px; height: 30px; }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-left { opacity: 0; transform: translateX(-36px); transition: opacity 0.75s ease, transform 0.75s ease; }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+  .reveal-right { opacity: 0; transform: translateX(36px); transition: opacity 0.75s ease, transform 0.75s ease; }
+  .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes heroFadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.5); }
+  }
+  @keyframes scrollBob {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(0.6); }
+  }
+  @keyframes ctaPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(244,100,10,0.55); }
+    60% { box-shadow: 0 0 0 18px rgba(244,100,10,0); }
+  }
+  @keyframes waBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes countUp { from { opacity: 0; } to { opacity: 1; } }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    #why { grid-template-columns: 1fr; gap: 48px; padding: 72px 6vw; }
+    .why-visual { height: 360px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .services-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .testi-card { min-width: 85vw; }
+    section { padding: 72px 5vw; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero-btns { flex-direction: column; }
+    .btn-primary, .btn-secondary { text-align: center; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="logo-mark">SC</div>
+    <div class="logo-text">
+      <div class="company-name">SUPAKAY</div>
+      <div class="company-tag">Company Limited</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">About</a></li>
+    <li><a href="#testimonials">Clients</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="btn-nav">Request Quote</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" class="mob-link">Services</a>
+  <a href="#why" class="mob-link">About</a>
+  <a href="#testimonials" class="mob-link">Clients</a>
+  <a href="#contact" class="mob-link">Contact</a>
+  <a href="#contact" class="mob-link" style="color: var(--orange);">Request Quote →</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Sierra Leone's Trusted Logistics Partner</div>
+    <h1 class="hero-headline">
+      Reliable Logistics<br>&amp; Business<br><span>Solutions</span><br>You Can Trust
+    </h1>
+    <p class="hero-sub">
+      Supakay Company Limited delivers end-to-end logistics, clearing, import-export, construction and supply chain services with speed, integrity, and global reach.
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.4 2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Request a Quote
+      </a>
+      <a href="#services" class="btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        Our Services
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll" onclick="document.getElementById('stats').scrollIntoView({behavior:'smooth'})">
+    <span class="scroll-text">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="stats-grid">
+    <div class="stat-item reveal">
+      <span class="stat-num" data-target="850">0<span>+</span></span>
+      <span class="stat-label">Projects Completed</span>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:0.1s">
+      <span class="stat-num" data-target="320">0<span>+</span></span>
+      <span class="stat-label">Clients Served</span>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:0.2s">
+      <span class="stat-num" data-target="12">0<span>+</span></span>
+      <span class="stat-label">Years of Experience</span>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:0.3s">
+      <span class="stat-num" data-target="98">0<span>%</span></span>
+      <span class="stat-label">Client Satisfaction</span>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header reveal">
+    <span class="section-tag">What We Offer</span>
+    <h2 class="section-title">Comprehensive Business<br>Solutions</h2>
+    <p class="section-lead">From clearing and forwarding to car sales, we deliver a full spectrum of logistics and business services tailored to your needs.</p>
+  </div>
+
+  <div class="services-grid">
+    <!-- Card 1 -->
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#F4640A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      </div>
+      <div class="service-title">Clearing &amp; Forwarding</div>
+      <p class="service-desc">Professional customs clearance and freight forwarding services with deep knowledge of import/export regulations to keep your goods moving seamlessly.</p>
+      <a href="#contact" class="service-link">Get a Quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <!-- Card 2 -->
+    <div class="service-card reveal" style="transition-delay:0.1s">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#F4640A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="service-title">Import &amp; Export</div>
+      <p class="service-desc">End-to-end import and export management covering documentation, logistics coordination, and compliance to connect you to global markets.</p>
+      <a href="#contact" class="service-link">Get a Quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <!-- Card 3 -->
+    <div class="service-card reveal" style="transition-delay:0.2s">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#F4640A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 9 12 2 21 9 21 20 3 20"/><rect x="9" y="14" width="6" height="7"/></svg>
+      </div>
+      <div class="service-title">Construction</div>
+      <p class="service-desc">Delivering quality construction projects on time and within budget — from residential builds to large-scale commercial infrastructure development.</p>
+      <a href="#contact" class="service-link">Get a Quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <!-- Card 4 -->
+    <div class="service-card reveal" style="transition-delay:0.1s">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#F4640A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      </div>
+      <div class="service-title">General Merchandise &amp; Supplies</div>
+      <p class="service-desc">Reliable sourcing and supply of general goods, equipment, and materials for businesses and institutions at competitive prices.</p>
+      <a href="#contact" class="service-link">Get a Quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <!-- Card 5 -->
+    <div class="service-card reveal" style="transition-delay:0.2s">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#F4640A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/><line x1="9" y1="3" x2="9" y2="16"/></svg>
+      </div>
+      <div class="service-title">Car Sales</div>
+      <p class="service-desc">Trusted dealer of used and new vehicles with a wide selection of quality cars to suit every budget — business fleets and personal vehicles.</p>
+      <a href="#contact" class="service-link">View Inventory <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <!-- Card 6 -->
+    <div class="service-card reveal" style="transition-delay:0.3s">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#F4640A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v7a2 2 0 0 1-2 2z"/><polyline points="17 17 17 12 7 12 7 17"/><polyline points="7 2 7 7 15 7"/></svg>
+      </div>
+      <div class="service-title">Car Rental</div>
+      <p class="service-desc">Flexible short and long-term vehicle rental solutions for corporates, NGOs, and individuals — with a maintained modern fleet and professional drivers available.</p>
+      <a href="#contact" class="service-link">Book a Vehicle <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section id="why">
+  <div class="why-visual reveal-left">
+    <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=900&q=80" alt="Logistics operations">
+    <div class="why-visual-overlay"></div>
+    <div class="why-badge-float">
+      <div class="badge-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <div class="badge-text">
+        <strong>ISO</strong>
+        <span>Certified Operations</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="reveal-right">
+    <span class="section-tag">Why Choose Us</span>
+    <h2 class="section-title">Built for Speed.<br>Driven by Trust.</h2>
+    <p class="section-lead" style="color: var(--text-body);">We combine local expertise with global standards to give your business the competitive edge it deserves.</p>
+
+    <div class="why-list">
+      <div class="why-item">
+        <div class="why-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F4640A" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div class="why-item-text">
+          <strong>Fast, On-Time Delivery</strong>
+          <span>We move your cargo with precision scheduling and real-time coordination to guarantee on-time arrivals every time.</span>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F4640A" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="why-item-text">
+          <strong>Secure Cargo Handling</strong>
+          <span>Your goods are treated with the highest level of care and security protocols throughout the entire supply chain.</span>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F4640A" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="why-item-text">
+          <strong>Competitive, Transparent Pricing</strong>
+          <span>No hidden charges. We offer fair, market-competitive rates with full cost transparency from quote to delivery.</span>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F4640A" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="why-item-text">
+          <strong>Experienced, Dedicated Team</strong>
+          <span>Our seasoned professionals bring decades of combined expertise in logistics, customs, and business operations.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHT BAND -->
+<div id="highlight">
+  <div class="reveal">
+    <span class="section-tag" style="text-align:center;display:block;">Our Promise</span>
+    <h2 class="section-title section-title-white">End-to-End Logistics Solutions</h2>
+    <p class="section-lead" style="margin:16px auto 0;text-align:center;">
+      From port to destination, we manage every stage of your supply chain — so you can focus on growing your business while we handle the movement.
+    </p>
+    <div class="highlight-features">
+      <div class="hl-feat">International Shipping</div>
+      <div class="hl-feat">Customs Compliance</div>
+      <div class="hl-feat">Last-Mile Delivery</div>
+      <div class="hl-feat">Real-Time Tracking</div>
+      <div class="hl-feat">24/7 Support</div>
+      <div class="hl-feat">Insured Cargo</div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testi-header reveal">
+    <span class="section-tag">Client Stories</span>
+    <h2 class="section-title">Trusted by Businesses<br>Across the Region</h2>
+  </div>
+
+  <div class="testi-track-wrap">
+    <div class="testi-track" id="testiTrack">
+      <div class="testi-card active">
+        <div class="star-row"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">Supakay handled our entire clearing and forwarding operation flawlessly. Our containers arrived on schedule and every document was in perfect order. Exceptional professionalism.</p>
+        <div class="testi-author">
+          <div class="author-avatar" style="background: var(--orange);">AK</div>
+          <div>
+            <div class="author-name">Alhaji Kamara</div>
+            <div class="author-role">CEO, Kamara Trading Co.</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="star-row"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">We've been using Supakay for car rentals for over three years. Their fleet is always well-maintained, drivers are professional, and the service is consistently reliable.</p>
+        <div class="testi-author">
+          <div class="author-avatar" style="background: var(--navy-light);">FD</div>
+          <div>
+            <div class="author-name">Fatmata Deen</div>
+            <div class="author-role">Operations Manager, NGO Partners SL</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="star-row"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">The construction team at Supakay delivered our warehouse complex ahead of schedule and within budget. The build quality exceeded our expectations. Highly recommended.</p>
+        <div class="testi-author">
+          <div class="author-avatar" style="background: #2A7A4B;">MB</div>
+          <div>
+            <div class="author-name">Mohamed Bangura</div>
+            <div class="author-role">Director, Bangura Industrial Group</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="star-row"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <div class="testi-quote">"</div>
+        <p class="testi-text">From sourcing to delivery, Supakay's merchandise and supply team never missed a beat. They understand the local market and have the connections to get things done fast.</p>
+        <div class="testi-author">
+          <div class="author-avatar" style="background: #7A2A6A;">IS</div>
+          <div>
+            <div class="author-name">Ibrahim Sesay</div>
+            <div class="author-role">Procurement Lead, WestAfrica Retail Ltd</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="testi-controls">
+    <button class="testi-btn" id="testiPrev">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="#0B1E3D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="testi-dots" id="testiDots">
+      <div class="testi-dot active" data-index="0"></div>
+      <div class="testi-dot" data-index="1"></div>
+      <div class="testi-dot" data-index="2"></div>
+    </div>
+    <button class="testi-btn" id="testiNext">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="#0B1E3D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- CTA -->
+<div id="cta">
+  <div class="reveal" style="position:relative;z-index:2">
+    <span class="section-tag" style="display:block;text-align:center">Take the Next Step</span>
+    <h2 class="section-title section-title-white" style="text-align:center">Need Reliable<br>Logistics Support?</h2>
+    <p class="cta-sub">Tell us your requirements and our expert team will prepare a comprehensive, tailored quote within 24 hours.</p>
+    <a href="#contact" class="btn-cta-pulse">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.4 2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Request a Quote
+    </a>
+  </div>
+</div>
+
+<!-- CONTACT + FOOTER -->
+<div id="contact">
+  <div class="contact-grid">
+    <!-- Form -->
+    <div class="contact-form-wrap reveal">
+      <span class="section-tag">Send a Message</span>
+      <h3 style="font-family:var(--font-head);font-size:36px;font-weight:800;color:white;line-height:1.1;margin-bottom:28px;">Let's Talk<br>Business</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="Your full name">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+232 ...">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>Service Required</label>
+        <select>
+          <option value="">Select a service...</option>
+          <option>Clearing &amp; Forwarding</option>
+          <option>Import &amp; Export</option>
+          <option>Construction</option>
+          <option>General Merchandise &amp; Supplies</option>
+          <option>Car Sales</option>
+          <option>Car Rental</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us about your requirements..."></textarea>
+      </div>
+      <button class="form-submit">Send Message →</button>
+    </div>
+
+    <!-- Info -->
+    <div class="contact-info reveal-right">
+      <div class="contact-info-head">We're Ready<br>When You Are</div>
+      <p class="contact-info-lead">Reach out through any of the channels below. Our dedicated team is available to respond to your enquiry promptly.</p>
+
+      <div class="contact-detail">
+        <div class="detail-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F4640A" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="detail-content">
+          <strong>Address</strong>
+          <span>Freetown, Sierra Leone<br>West Africa</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="detail-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F4640A" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.4 2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.8a16 16 0 0 0 6.29 6.29l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="detail-content">
+          <strong>Phone / WhatsApp</strong>
+          <span>+232 XX XXX XXXX<br>Mon – Sat, 8am – 6pm</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="detail-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F4640A" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="detail-content">
+          <strong>Email</strong>
+          <span>info@supakaycompany.com<br>quotes@supakaycompany.com</span>
+        </div>
+      </div>
+
+      <div style="margin-top:32px;padding:28px;background:rgba(244,100,10,0.08);border:1px solid rgba(244,100,10,0.2);border-radius:12px;">
+        <p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.7;font-weight:300;">
+          <span style="color:var(--orange);font-weight:600;">Quick Response Guarantee:</span><br>
+          We respond to all enquiries within 2 business hours during working days. For urgent needs, reach us directly on WhatsApp.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <p>© 2025 <span>SUPAKAY COMPANY LIMITED</span>. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/23200000000" class="wa-float" target="_blank" rel="noopener" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.562 4.12 1.539 5.845L0 24l6.334-1.517A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.676-.513-5.193-1.406l-.374-.22-3.882.93.975-3.765-.244-.389A9.944 9.944 0 0 1 2 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+</a>
+
+<script>
+  // ── NAV SCROLL
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // ── HAMBURGER
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  document.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // ── SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // ── COUNTER ANIMATION
+  function animateCounter(el, target, suffix) {
+    let current = 0;
+    const duration = 2000;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      el.childNodes[0].textContent = Math.floor(current);
+    }, 16);
+  }
+
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const statNums = document.querySelectorAll('.stat-num');
+        statNums.forEach(el => {
+          const target = parseInt(el.getAttribute('data-target'));
+          animateCounter(el, target);
+        });
+        statsObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+  statsObserver.observe(document.getElementById('stats'));
+
+  // ── TESTIMONIAL SLIDER
+  const track = document.getElementById('testiTrack');
+  const cards = track.querySelectorAll('.testi-card');
+  const dots = document.querySelectorAll('.testi-dot');
+  let currentSlide = 0;
+  const visibleCount = window.innerWidth < 768 ? 1 : 3;
+
+  function goToSlide(index) {
+    const maxSlide = Math.max(0, cards.length - (window.innerWidth < 768 ? 1 : 3));
+    index = Math.max(0, Math.min(index, maxSlide));
+    currentSlide = index;
+    const cardWidth = cards[0].offsetWidth + 28;
+    track.style.transform = `translateX(-${index * cardWidth}px)`;
+    cards.forEach((c, i) => c.classList.toggle('active', i === index));
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+  }
+
+  document.getElementById('testiNext').addEventListener('click', () => goToSlide(currentSlide + 1));
+  document.getElementById('testiPrev').addEventListener('click', () => goToSlide(currentSlide - 1));
+  dots.forEach(dot => dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.index))));
+
+  // auto-play
+  setInterval(() => {
+    const maxSlide = Math.max(0, cards.length - (window.innerWidth < 768 ? 1 : 3));
+    goToSlide(currentSlide >= maxSlide ? 0 : currentSlide + 1);
+  }, 5000);
+
+  // ── FORM SUBMIT
+  document.querySelector('.form-submit').addEventListener('click', function() {
+    this.textContent = '✓ Message Sent!';
+    this.style.background = '#2A7A4B';
+    setTimeout(() => {
+      this.textContent = 'Send Message →';
+      this.style.background = '';
+    }, 3000);
+  });
+
+  // ── SMOOTH ANCHOR
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
